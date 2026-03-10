@@ -69,7 +69,7 @@
             </Button>
         </StackPanel>
 
-        
+
         <DataGrid x:Name="StudentsGrid" Grid.Row="1"
                   AutoGenerateColumns="False" IsReadOnly="True"
                   CanUserAddRows="False" Margin="0,0,0,15"
@@ -79,6 +79,12 @@
                   GridLinesVisibility="None"
                   BorderThickness="0"
                   Foreground="#FF004D40">
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    
+                </Style>
+                
+            </DataGrid.RowStyle>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ФИО" Binding="{Binding FullName}" Width="*" />
                 <DataGridTextColumn Header="Возраст" Binding="{Binding Age}" Width="100"/>

@@ -35,6 +35,7 @@ namespace UP
             public string FullName { get; set; }
             public int Age { get; set; }
             public string GroupName { get; set; }
+            public bool IsChanged { get; set; }
         }
 
 
@@ -61,17 +62,18 @@ namespace UP
                 editingStudent.FullName = NameTextBox.Text;
                 editingStudent.Age = age;
                 editingStudent.GroupName = GroupTextBox.Text;
-
+                editingStudent.IsChanged = true;
                 editingStudent = null;
             }
             else
             {
-                
+
                 Student newStudent = new Student
                 {
                     FullName = NameTextBox.Text,
                     Age = age,
-                    GroupName = GroupTextBox.Text
+                    GroupName = GroupTextBox.Text,
+                    IsChanged = true
                 };
 
                 students.Add(newStudent);
@@ -118,6 +120,12 @@ namespace UP
             {
                 string json = JsonSerializer.Serialize(students, new JsonSerializerOptions { WriteIndented = true });
                 File.WriteAllText(FilePath, json);
+                
+                foreach (Student student in students)
+                {
+                    student.IsChanged = false;
+                }
+                UpdateGrid();
                 MessageBox.Show("Данные сохранены!");
             }
             catch (Exception ex)
