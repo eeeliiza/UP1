@@ -8,7 +8,7 @@
         Title="Список студентов" Height="500" Width="850"
         WindowStartupLocation="CenterScreen"
         Background="#FFB3E5FC">
-    <!-- светло-голубой фон -->
+  
 
     <Grid Margin="20">
         <Grid.RowDefinitions>
@@ -19,7 +19,7 @@
 
         
 
-        <!-- Поля ввода и кнопка Добавить -->
+        
         <StackPanel Orientation="Horizontal" Margin="0,0,0,15" HorizontalAlignment="Center">
 
             <TextBox x:Name="NameTextBox" Width="200" Height="30"
@@ -69,7 +69,7 @@
             </Button>
         </StackPanel>
 
-        <!-- Таблица студентов -->
+        
         <DataGrid x:Name="StudentsGrid" Grid.Row="1"
                   AutoGenerateColumns="False" IsReadOnly="True"
                   CanUserAddRows="False" Margin="0,0,0,15"
@@ -86,8 +86,26 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <!-- Кнопки снизу -->
+        
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Редактировать" Width="120" Height="35" Margin="10,0"
+         Click="Edit_Click"
+         FontWeight="Bold" Foreground="White" Cursor="Hand"
+         Background="#FF0097A7">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border CornerRadius="12" Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
             <Button Content="Удалить" Width="120" Height="35" Margin="10,0"
                     Click="Delete_Click"
                     FontWeight="Bold" Foreground="White" Cursor="Hand"
@@ -110,7 +128,7 @@
             <Button Content="Сохранить" Width="120" Height="35" Margin="10,0"
                     Click="Save_Click"
                     FontWeight="Bold" Foreground="White" Cursor="Hand"
-                    Background="#FF00ACC1">
+                    Background="#FF0097A7">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Template">
@@ -127,7 +145,7 @@
             </Button>
         </StackPanel>
 
-        <!-- Градиентная подложка -->
+        
         <Grid.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                 <GradientStop Color="#FFB3E5FC" Offset="0"/>

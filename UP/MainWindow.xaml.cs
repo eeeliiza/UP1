@@ -21,7 +21,7 @@ namespace UP
     {
         private List<Student> students = new List<Student>();
         private const string FilePath = "students.json";
-
+        private Student editingStudent = null;
         public MainWindow()
         {
             InitializeComponent();
@@ -37,7 +37,7 @@ namespace UP
             public string GroupName { get; set; }
         }
 
-        
+
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(NameTextBox.Text) ||
@@ -48,28 +48,56 @@ namespace UP
                 return;
             }
 
-            if (!int.TryParse(AgeTextBox.Text, out int age) || age <= 0)
+            int age;
+            if (!int.TryParse(AgeTextBox.Text, out age))
             {
-                MessageBox.Show("Введите корректный возраст!");
+                MessageBox.Show("Введите правильный возраст!");
                 return;
             }
 
-            Student newStudent = new Student
+            if (editingStudent != null)
             {
-                FullName = NameTextBox.Text,
-                Age = age,
-                GroupName = GroupTextBox.Text
-            };
+                
+                editingStudent.FullName = NameTextBox.Text;
+                editingStudent.Age = age;
+                editingStudent.GroupName = GroupTextBox.Text;
 
-            students.Add(newStudent);
+                editingStudent = null;
+            }
+            else
+            {
+                
+                Student newStudent = new Student
+                {
+                    FullName = NameTextBox.Text,
+                    Age = age,
+                    GroupName = GroupTextBox.Text
+                };
+
+                students.Add(newStudent);
+            }
+
             UpdateGrid();
 
-            
             NameTextBox.Clear();
             AgeTextBox.Clear();
             GroupTextBox.Clear();
         }
 
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+            if (StudentsGrid.SelectedItem is Student student)
+            {
+                editingStudent = student;
+                NameTextBox.Text = student.FullName;
+                AgeTextBox.Text = student.Age.ToString();
+                GroupTextBox.Text = student.GroupName;
+            }
+            else
+            {
+                MessageBox.Show("Выберите строку для редактирования");
+            }
+        }
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
             if (StudentsGrid.SelectedItem is Student student)
