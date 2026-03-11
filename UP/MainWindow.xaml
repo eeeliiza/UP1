@@ -75,7 +75,7 @@
                   AutoGenerateColumns="False" IsReadOnly="True"
                   CanUserAddRows="False" Margin="0,0,0,15"
                   FontSize="14"
-                  Background="#FFE0FFFF"
+                  Background="#E0FAF9"
                   
                   GridLinesVisibility="None"
                   BorderThickness="0"
@@ -84,7 +84,7 @@
                 <Style TargetType="DataGridRow">
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding IsChanged}" Value="True">
-                            <Setter Property ="Background" Value ="#80FF0000"/>
+                            <Setter Property ="Background" Value ="#66FF0000"/>
                             <Setter Property ="Foreground" Value ="White"/>
                         </DataTrigger>
                     </Style.Triggers>
